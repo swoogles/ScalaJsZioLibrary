@@ -24,6 +24,10 @@ object QueryParameters {
             .flatMap(typer),
       )
 
+  def getOptional[T](parameterName: String,
+                     typer: String => T): Any =
+    getOptional(parameterName, x => Some(typer(x)))
+
   def getOptionalZ[T](
     parameterName: String,
     typer: String => Option[T],
