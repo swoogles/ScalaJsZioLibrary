@@ -25,7 +25,7 @@ object QueryParameters {
       )
 
   def getOptional[T](parameterName: String,
-                     typer: String => T): Any =
+                     typer: String => T): ZIO[Browser, Nothing, Option[T]] =
     getOptional(parameterName, x => Some(typer(x)))
 
   def getOptionalZ[T](
