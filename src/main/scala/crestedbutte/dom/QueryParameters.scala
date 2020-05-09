@@ -24,9 +24,8 @@ object QueryParameters {
             .flatMap(typer),
       )
 
-  def getOptional[T](parameterName: String,
-                     typer: String => T): ZIO[Browser, Nothing, Option[T]] =
-    getOptional(parameterName, x => Some(typer(x)))
+  def getOptional[T](parameterName: String): ZIO[Browser, Nothing, Option[String]] =
+    getOptional(parameterName, x => Some(x))
 
   def getOptionalZ[T](
     parameterName: String,
