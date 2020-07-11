@@ -11,7 +11,7 @@ object QueryParameters {
     getOptional(parameterName, raw => Some(typer(raw)))
 
   def getOptional[T](parameterName: String,
-                     typer: String => Option[T]) =
+                     typer: String => Option[T]): ZIO[Browser.Service, Nothing, Option[T]] =
     ZIO
       .environment[Browser.Service]
       .map(
