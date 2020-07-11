@@ -10,16 +10,16 @@ object ServiceWorkerBillding {
 
   def register(path: String) =
     ZIO
-      .environment[Browser]
+      .environment[Browser.Service]
       .map {
         registerServiceWorkerLogic(_, path)
       }
 
-  def registerServiceWorkerLogic(browser: Browser, path: String) = {
+  def registerServiceWorkerLogic(browser: Browser.Service, path: String) = {
     // TODO Ew. Try to get this removed after first version of PWA is working
     import scala.concurrent.ExecutionContext.Implicits.global
 
-    toServiceWorkerNavigator(browser.browser.window().navigator).serviceWorker
+    toServiceWorkerNavigator(browser.window().navigator).serviceWorker
       .register(path)
       .toFuture
       .onComplete {
