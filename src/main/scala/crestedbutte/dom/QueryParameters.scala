@@ -43,5 +43,5 @@ object QueryParameters {
             .flatMap(typer)
         result
       }
-      .flatMap(optResult => ZIO.fromOption(optResult))
+      .flatMap(optResult => ZIO.fromOption(optResult)).mapError( _ => ())
 }
