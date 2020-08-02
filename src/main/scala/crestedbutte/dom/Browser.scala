@@ -5,9 +5,10 @@ import java.net.URI
 import org.scalajs.dom.{Element, Node, NodeList, Window}
 import org.scalajs.dom.raw.HTMLElement
 import zio.Has
-
+// import zio.Has
 
 object Browser {
+  type Browser = Has[Browser.Service]
   trait Service {
     def body(): HTMLElement
     def window(): Window
