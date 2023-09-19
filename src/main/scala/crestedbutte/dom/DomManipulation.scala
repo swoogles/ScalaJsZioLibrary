@@ -10,7 +10,7 @@ object DomManipulation {
     pageContent: Node,
   ): ZIO[Browser, Nothing, Node] =
     ZIO
-      .access[Browser](_.get)
+      .service[Browser]
       .map {
         browser =>
           browser
@@ -27,7 +27,7 @@ object DomManipulation {
     message: Node,
   ): ZIO[Browser, Throwable, Unit] =
     ZIO
-      .access[Browser](_.get)
+      .service[Browser]
       .map[Unit](
         browser => {
           println("Should show timezones: " + message)
@@ -43,7 +43,7 @@ object DomManipulation {
     innerContentId: String,
   ): ZIO[Browser, Nothing, Unit] =
     ZIO
-      .access[Browser](_.get)
+      .service[Browser]
       .map {
         browser =>
           browser
@@ -69,7 +69,7 @@ object DomManipulation {
     elementId: String,
   ): ZIO[Browser, Nothing, Unit] =
     ZIO
-      .access[Browser](_.get)
+      .service[Browser]
       .map {
         browser =>
           browser

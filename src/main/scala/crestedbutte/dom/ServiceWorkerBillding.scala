@@ -2,15 +2,15 @@ package crestedbutte.dom
 
 import crestedbutte.Browser
 import org.scalajs.dom.experimental.serviceworkers.toServiceWorkerNavigator
-import zio.{Has, ZIO}
+import zio.ZIO
 
 import scala.util.{Failure, Success}
 
 object ServiceWorkerBillding {
 
-  def register(path: String): ZIO[Has[Browser.Service], Nothing, Unit] =
+  def register(path: String): ZIO[Browser.Service, Nothing, Unit] =
     ZIO
-      .access[Has[Browser.Service]](_.get)
+      .service[Browser.Service]
       .map {
         registerServiceWorkerLogic(_, path)
       }

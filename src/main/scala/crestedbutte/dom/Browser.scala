@@ -4,17 +4,16 @@ import java.net.URI
 
 import org.scalajs.dom.{Element, Node, NodeList, Window}
 import org.scalajs.dom.raw.HTMLElement
-import zio.Has
 // import zio.Has
 
 object Browser {
-  type Browser = Has[Browser.Service]
+  type Browser = Browser.Service
   trait Service {
     def body(): HTMLElement
     def window(): Window
     def querySelector(selectors: String): Option[Element]
     def querySelectorAll(selectors: String): Seq[Element]
-    def workOnFullHtmlElement(function: (Element) => Unit)
+    def workOnFullHtmlElement(function: (Element) => Unit): Unit
     def rewriteCurrentUrl(paramName: String, paramValue: String): Unit
 
     def alterUrlWithNewValue(url: String,

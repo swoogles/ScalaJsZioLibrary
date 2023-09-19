@@ -49,7 +49,7 @@ trait BrowserLive extends Browser {
           UrlParsing.replaceParamInUrl(url, paramName, paramValue),
         )
 
-    def workOnFullHtmlElement(function: (Element) => Unit) =
+    def workOnFullHtmlElement(function: (Element) => Unit): Unit =
       function(
         org.scalajs.dom.document.querySelector("html"),
       )

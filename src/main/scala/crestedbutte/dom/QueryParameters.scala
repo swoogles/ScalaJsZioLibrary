@@ -1,19 +1,19 @@
 package crestedbutte
 
-import zio.{Has, ZIO}
+import zio.ZIO
 
 object QueryParameters {
 
   def getRequired[T](
     parameterName: String,
     typer: String => T,
-  ): ZIO[Has[Browser.Service], Nothing, Option[T]] =
+  ): ZIO[Browser.Service, Nothing, Option[T]] =
     getOptional(parameterName, raw => Some(typer(raw)))
 
   def getOptional[T](parameterName: String,
-                     typer: String => Option[T]): ZIO[Has[Browser.Service], Nothing, Option[T]] =
+                     typer: String => Option[T]): ZIO[Browser.Service, Nothing, Option[T]] =
     ZIO
-      .access[Has[Browser.Service]](_.get)
+      .service[Browser.Service]
       .map(
         browser =>
           UrlParsing
@@ -24,15 +24,15 @@ object QueryParameters {
             .flatMap(typer),
       )
 
-  def getOptional[T](parameterName: String): ZIO[Has[Browser.Service], Nothing, Option[String]] =
+  def getOptional[T](parameterName: String): ZIO[Browser.Service, Nothing, Option[String]] =
     getOptional(parameterName, x => Some(x))
 
   def getOptionalZ[T](
     parameterName: String,
     typer: String => Option[T],
-  ): ZIO[Has[Browser.Service], Unit, T] =
+  ): ZIO[Browser.Service, Unit, T] =
     ZIO
-      .access[Has[Browser.Service]](_.get)
+      .service[Browser.Service]
       .map { browser =>
         val result: Option[T] =
           UrlParsing
