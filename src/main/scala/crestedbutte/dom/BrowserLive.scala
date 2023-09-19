@@ -54,13 +54,13 @@ trait BrowserLive extends Browser {
         org.scalajs.dom.document.querySelector("html"),
       )
 
-    override def querySelectorAll(selectors: String): Seq[Node] =
+    override def querySelectorAll(selectors: String): Seq[Element] =
       convertNodesToList(
         body()
           .querySelectorAll(selectors),
       )
 
-    override def convertNodesToList(nodes: NodeList): Seq[Node] =
+    override def convertNodesToList(nodes: NodeList[Element]): Seq[Element] =
       for { i <- Range(0, nodes.length) } yield nodes(i)
 
     override def url(): URI =

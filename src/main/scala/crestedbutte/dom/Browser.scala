@@ -13,7 +13,7 @@ object Browser {
     def body(): HTMLElement
     def window(): Window
     def querySelector(selectors: String): Option[Element]
-    def querySelectorAll(selectors: String): Seq[Node]
+    def querySelectorAll(selectors: String): Seq[Element]
     def workOnFullHtmlElement(function: (Element) => Unit)
     def rewriteCurrentUrl(paramName: String, paramValue: String): Unit
 
@@ -21,7 +21,7 @@ object Browser {
                              paramName: String,
                              paramValue: String): Unit
     def url(): URI
-    def convertNodesToList(nodes: NodeList): Seq[Node] // TODO THIS DOES NOT BELONG HERE
+    def convertNodesToList(nodes: NodeList[Element]): Seq[Element] // TODO THIS DOES NOT BELONG HERE
   }
 }
 
